@@ -54,6 +54,18 @@ func (opts *SHA3_384Opts) Algorithm() string {
 	return SHA3_384
 }
 
+// ---------------------------- SM EXTENSION START -----------------------------
+// SM3 contains options relating to SM3
+type SM3Opts struct {
+}
+
+// Algorithm returns the hash algorithm identifier (to be used).
+func (opts *SM3Opts) Algorithm() string {
+	return SM3
+}
+
+// ----------------------------- SM EXTENSION END ------------------------------
+
 // GetHashOpt returns the HashOpts corresponding to the passed hash function
 func GetHashOpt(hashFunction string) (HashOpts, error) {
 	switch hashFunction {
@@ -65,6 +77,10 @@ func GetHashOpt(hashFunction string) (HashOpts, error) {
 		return &SHA3_256Opts{}, nil
 	case SHA3_384:
 		return &SHA3_384Opts{}, nil
+		// ---------------------------- SM EXTENSION START -----------------------------
+	case SM3:
+		return &SM3Opts{}, nil
+		// ----------------------------- SM EXTENSION END ------------------------------
 	}
 	return nil, fmt.Errorf("hash function not recognized [%s]", hashFunction)
 }
